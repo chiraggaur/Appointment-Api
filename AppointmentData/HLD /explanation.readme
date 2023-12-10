@@ -1,0 +1,74 @@
+HLD - Appointment Booking System
+
+1. Client Application (Frontend):
+   - Displays appointments
+   - Allows registration of new appointments
+   - Communicates with the server via RESTful API
+
+2. Server Application (Backend):
+   - Handles business logic and data processing
+   - Implements RESTful API endpoints for CRUD operations
+   - Validates requests and manages appointments
+
+   2.1 Appointment Controller:
+       - Manages routes related to appointments
+       - Handles CRUD operations for appointments
+       - Validates input and checks availability
+       - Communicates with the database
+
+   2.2 Database Models:
+       - Defines Mongoose schemas for Clinic, Doctor, Patient, and Appointment models
+
+   2.3 Appointment Service:
+       - Contains business logic related to appointments
+       - Handles appointment creation, validation, and time slot management
+
+   2.4 Middleware:
+       - Uses middleware like body-parser for parsing JSON requests
+       - Implements error handling middleware to catch and log errors
+
+3. Database:
+   - Stores information about clinics, doctors, patients, and appointments
+   - Ensures data consistency and persistence
+
+   3.1 Clinic Collection:
+       - Stores information about clinics, including name, address, and associated doctors
+
+   3.2 Doctor Collection:
+       - Stores information about doctors, including name, email, specializations, and available time slots
+
+   3.3 Patient Collection:
+       - Stores information about patients, including name, email, and other relevant details
+
+   3.4 Appointment Collection:
+       - Stores information about appointments, including clinic, doctor, patient, and time slot details
+
+
+// flow chart points 
+
+1. Start
+2. User interacts with the Client Application:
+   - Views available appointments
+   - Chooses an appointment or registers a new one
+3. Client Application sends a request to the Server:
+   - Retrieves available appointments
+   - Registers a new appointment
+4. Server receives the request:
+   - Routes to the Appointment Controller
+5. Appointment Controller:
+   - Validates the request
+   - Checks availability and communicates with the Database
+6. Database:
+   - Manages Clinics, Doctors, Patients, and Appointments
+7. Appointment Controller processes the request:
+   - If valid, communicates with the Appointment Service
+   - If invalid, sends an error response to the Client
+8. Appointment Service:
+   - Contains business logic for appointments
+   - Manages appointment creation, validation, and time slots
+9. Database is updated:
+   - New appointment is stored
+10. Server sends a response to the Client:
+    - Success or failure message
+11. Client Application updates the UI accordingly
+12. End
