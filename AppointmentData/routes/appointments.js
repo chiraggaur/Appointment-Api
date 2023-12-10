@@ -36,8 +36,7 @@ router.get("/appointments/:appointmentId", async (req, res) => {
 router.get("/available-appointments/:doctorId", async (req, res) => {
   try {
     // Implement logic to retrieve available appointments based on doctor's schedule
-    // You might want to customize this based on your application's requirements
-    // This is just a placeholder example
+    // This is just a placeholder example, you may need to adjust it based on your use case
     const availableAppointments = await Appointment.find({
       doctorId: req.params.doctorId,
     });
@@ -66,11 +65,9 @@ router.post("/register-appointment", async (req, res) => {
     });
 
     if (!isSlotAvailable) {
-      return res
-        .status(400)
-        .json({
-          message: "Selected time slot is not available for the doctor.",
-        });
+      return res.status(400).json({
+        message: "Selected time slot is not available for the doctor.",
+      });
     }
 
     // Check if the time slot is not already booked
@@ -79,12 +76,16 @@ router.post("/register-appointment", async (req, res) => {
       clinicId,
       $or: [
         {
-          "timeSlot.startTime": { $lte: startTime },
-          "timeSlot.endTime": { $gte: startTime },
+          $and: [
+            { "timeSlot.startTime": { $lte: startTime } },
+            { "timeSlot.endTime": { $gte: startTime } },
+          ],
         },
         {
-          "timeSlot.startTime": { $lte: endTime },
-          "timeSlot.endTime": { $gte: endTime },
+          $and: [
+            { "timeSlot.startTime": { $lte: endTime } },
+            { "timeSlot.endTime": { $gte: endTime } },
+          ],
         },
       ],
     });
